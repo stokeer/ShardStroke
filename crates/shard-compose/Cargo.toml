@@ -1,0 +1,11 @@
+[package]
+name = "shard-compose"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "CPU reference compositor for the ShardStroke layer model (per-channel blending, masks, uniform fills)"
+
+[dependencies]
+shard-model = { path = "../shard-model" }
+rayon = "1"
+

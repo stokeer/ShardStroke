@@ -1,0 +1,22 @@
+ShardStroke
+Copyright 2026 the ShardStroke contributors
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+ShardStroke reads project and material files of other texturing software for interoperability only. It does
+not contain, bundle or redistribute any third-party program, engine, asset or library other than the
+open-source components listed below. Product names and trademarks of other software belong to their owners;
+ShardStroke is independent and not affiliated with, endorsed by or sponsored by any of them.
+
+Optional components used at run time, when present on the machine:
+- The command-line renderer of an installed material authoring tool, from the user's own installation.
+  It is never distributed with ShardStroke.
+
+Third-party software distributed in the release packages (not in the source repository):
+- Intel Open Image Denoise 2.5.1, Copyright Intel Corporation, Apache License 2.0
+  (third_party/oidn/LICENSE.txt and its third-party-programs files).
+
+Design references:
+- TextureCraft by the ArtCraft team (https://github.com/storytold/texturecraft), MIT OR Apache-2.0, was
+  reviewed as a reference. Any code adapted from it keeps its copyright notice next to the code and is
+  listed here.

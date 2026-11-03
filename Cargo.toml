@@ -1,0 +1,11 @@
+[workspace]
+resolver = "2"
+members = ["crates/shard-formats", "crates/shard-model", "crates/shard-compose", "crates/shard-engine", "crates/shard-app"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+
+[workspace.dependencies]
+serde_json = "1"

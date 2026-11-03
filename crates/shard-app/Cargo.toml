@@ -1,0 +1,38 @@
+[package]
+name = "shard-app"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "ShardStroke desktop app (wgpu viewport + texture-space painting)"
+
+[dependencies]
+shard-formats = { path = "../shard-formats" }
+shard-model = { path = "../shard-model" }
+shard-compose = { path = "../shard-compose" }
+shard-engine = { path = "../shard-engine" }
+wgpu = "24"
+winit = "0.30"
+egui = "0.31"
+egui-wgpu = "0.31"
+egui-winit = "0.31"
+pollster = "0.4"
+glam = "0.29"
+bytemuck = { version = "1", features = ["derive"] }
+png = "0.17"
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "tiff", "tga", "bmp"] }
+rayon = "1"
+exr = "1"
+tobj = "4"
+rfd = "0.15"
+image-webp = "0.2"
+serde_json = { workspace = true }
+egui_dock = { version = "0.16", features = ["serde"] }
+serde = { version = "1", features = ["derive"] }
+half = { version = "2", features = ["bytemuck"] }
+libloading = "0.8"
+
+[build-dependencies]
+embed-resource = "3"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.59", features = ["Win32_Foundation", "Win32_System_Performance", "Win32_System_Threading"] }

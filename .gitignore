@@ -1,0 +1,32 @@
+# build output
+/target/
+**/__pycache__/
+*.pyc
+
+# local Python environment of the tools
+/tools/.venv/
+
+# third-party binaries: shipped in the release zip, not in the repository (see third_party/oidn/README.md)
+/third_party/oidn/bin/
+
+# corpus data taken from local projects (not ours to redistribute)
+/tools/truth/
+/tools/painter_probe/probe_log.txt
+
+# editor / OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+
+# Internal working notes stay local (Portuguese, research and test-corpus details); public docs are English
+/docs/*.md
+!/docs/ROADMAP.md
+/tools/extract_sbam.py
+# Test-corpus data and tools tied to other vendors' software stay local
+/tools/corpus.json
+/tools/baseline.json
+/tools/painter_plugin/
+/tools/painter_probe/
+/tools/chunk_scan.py
+/tools/key_scan.py
