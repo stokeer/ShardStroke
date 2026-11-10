@@ -1,0 +1,14 @@
+[package]
+name = "shard-formats"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Readers for Substance Painter data files (HDF5 container + Alg serialization)"
+
+[dependencies]
+serde_json = { workspace = true }
+lz4_flex = { version = "0.11", default-features = false, features = ["safe-decode"] }
+openjpeg = { version = "0.10", package = "jpeg2k" }
+sevenz-rust2 = { version = "0.23", features = ["deflate", "zstd", "brotli", "lz4"] }
+roxmltree = "0.21.1"
+jpeg-decoder = "0.3"

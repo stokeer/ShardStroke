@@ -1,0 +1,24 @@
+[package]
+name = "shard-engine"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Headless ShardStroke engine: project loading, mesh, strokes, bitmaps, composition helpers and measurement against Painter exports"
+
+[dependencies]
+shard-gpu = { path = "../shard-gpu" }
+shard-formats = { path = "../shard-formats" }
+shard-model = { path = "../shard-model" }
+shard-compose = { path = "../shard-compose" }
+glam = "0.29"
+ab_glyph = "0.2"
+bytemuck = { version = "1", features = ["derive"] }
+png = "0.17"
+tobj = "4"
+serde_json = { workspace = true }
+serde = { version = "1", features = ["derive"] }
+zip = { version = "2", default-features = false, features = ["deflate"] }
+
+[[bin]]
+name = "shard-measure"
+path = "src/bin/shard-measure.rs"

@@ -1,0 +1,13 @@
+[package]
+name = "shard-mockup"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# Standalone: a clickable mockup of the reworked UI, kept out of the main workspace.
+[workspace]
+
+[dependencies]
+eframe = "0.31"
+egui_extras = { version = "0.31", features = ["svg"] }
+image = { version = "0.25", default-features = false, features = ["png"] }

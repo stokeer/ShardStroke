@@ -1,0 +1,13 @@
+[package]
+name = "shard-gpu"
+description = "GPU (compute) layer compositing for ShardStroke, checked against the CPU compositor"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+shard-compose = { path = "../shard-compose" }
+shard-model = { path = "../shard-model" }
+wgpu = "24"
+pollster = "0.4"
+bytemuck = { version = "1", features = ["derive"] }

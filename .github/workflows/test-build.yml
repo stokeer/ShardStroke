@@ -1,0 +1,71 @@
+# Test builds: every push to main (or a manual run) is built, tested and published as the rolling
+# "test" pre-release, replacing the previous one.
+name: Test build
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: test-build
+  cancel-in-progress: true
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    env:
+      OIDN_VERSION: 2.5.1
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Open Image Denoise
+        shell: pwsh
+        run: |
+          $name = "oidn-$env:OIDN_VERSION.x64.windows"
+          Invoke-WebRequest "https://github.com/RenderKit/oidn/releases/download/v$env:OIDN_VERSION/$name.zip" -OutFile oidn.zip
+          Expand-Archive oidn.zip -DestinationPath oidn_tmp
+          New-Item -ItemType Directory -Force third_party/oidn/bin | Out-Null
+          Copy-Item "oidn_tmp/$name/bin/*.dll" third_party/oidn/bin/
+
+      - name: Test
+        run: cargo test --workspace --release
+
+      - name: Build
+        shell: pwsh
+        run: |
+          $env:RUSTFLAGS = "--remap-path-prefix=$env:GITHUB_WORKSPACE=. --remap-path-prefix=$env:USERPROFILE=~"
+          cargo build --release -p shard-app
+
+      - name: Package
+        id: package
+        shell: pwsh
+        run: |
+          $short = "$env:GITHUB_SHA".Substring(0, 7)
+          $version = "test-$short"
+          $dir = "ShardStroke-$version-windows-x64"
+          New-Item -ItemType Directory -Force "$dir/third_party/oidn" | Out-Null
+          Copy-Item target/release/shard-app.exe "$dir/ShardStroke.exe"
+          Copy-Item third_party/oidn/bin/*.dll $dir/
+          Copy-Item third_party/oidn/*.txt "$dir/third_party/oidn/"
+          Copy-Item LICENSE, NOTICE $dir/
+          (Get-Content tools/release/README.txt -Raw).Replace("{VERSION}", $version) | Set-Content "$dir/README.txt" -NoNewline
+          Compress-Archive -Path "$dir/*" -DestinationPath "$dir.zip"
+          "zip=$dir.zip" >> $env:GITHUB_OUTPUT
+          "short=$short" >> $env:GITHUB_OUTPUT
+
+      - name: Publish the "test" pre-release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete test --cleanup-tag --yes 2>$null
+          $notes = "Automatic test build of commit $env:GITHUB_SHA (``${{ steps.package.outputs.short }}``). Not a stable release: it may be broken. Replaced on every push to main."
+          gh release create test "${{ steps.package.outputs.zip }}" --prerelease --target $env:GITHUB_SHA --title "Test build ${{ steps.package.outputs.short }}" --notes $notes

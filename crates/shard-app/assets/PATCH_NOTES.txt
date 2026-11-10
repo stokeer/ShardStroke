@@ -1,0 +1,31 @@
+0.1.0 PREVIEW
+
+Opening projects
+- Opens projects saved by industry-standard texturing software: meshes, texture sets, the full layer stack with
+  masks, fills, generators, filters and paint strokes.
+- Shows each texture set as soon as it is composed; progress in the status bar.
+- Recent projects on the start screen; recovery of unsaved work after a crash.
+
+Texturing
+- Layers, groups, masks and effects with blend modes and opacity, edited live.
+- Paint and eraser with brush presets and alphas; the eyedropper picks from the mesh.
+- Masks: invert, invert background, clear; mask preview.
+- Drag over the eyes to show or hide many layers or texture sets in one stroke.
+- Texture sets can be hidden or isolated; the brush only reaches what is shown.
+
+Viewport
+- Physically based shading with image-based lighting, bloom and a path-traced mode.
+- Channel and mesh-map views, environment rotation and exposure.
+
+Export
+- Texture export per set with presets and padding past the UV islands.
+
+Interface
+- Windows that dock, tab, split and float; lock the layout in Settings.
+- Assets shelf with thumbnails, filters and grid or list view.
+- Pixel-font interface with a purple highlight; three animation levels.
+- Industry-standard keyboard shortcuts.
+
+Not yet
+- Material authoring (the node graph) is laid out but not built.
+- Mesh map baking.

@@ -1,0 +1,25 @@
+# build output
+/target/
+/design/mockup/target/
+**/__pycache__/
+*.pyc
+
+# local Python environment of the tools
+/tools/.venv/
+
+# third-party binaries: shipped in the release zip, not in the repository (see third_party/oidn/README.md)
+/third_party/oidn/bin/
+
+# local test data
+/tools/truth/
+
+# working notes stay local; public docs are listed here
+/docs/*.md
+!/docs/ROADMAP.md
+!/docs/STATUS.md
+
+# editor / OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
